@@ -30,9 +30,7 @@ public class Falcon {
         bounds = new Rectangle(position.x, position.y, falconPic.getWidth(), falconPic.getHeight());
     }
     
-    public void jump(){
-        velocity.y = 250;
-    }
+    
     
     public void update(float deltaTime){
         // add gravity
