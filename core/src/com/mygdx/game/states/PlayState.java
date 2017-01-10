@@ -28,8 +28,8 @@ public class PlayState extends State {
     private int score;
     private BitmapFont font;
 
-    private final float CAM_X_OFFSET = 30;
-    private final float PIPE_GAP_AMOUNT = 4;
+    private final float CAM_Y_OFFSET = 30;
+    private final float OBSTACLE_GAP_AMOUNT = 4;
 
     public PlayState(StateManager sm) {
         super(sm);
@@ -38,12 +38,12 @@ public class PlayState extends State {
         falcon = new Falcon(50, 200);
         bg = new Texture("bg.png");
         // move the camera to match the bird
-        moveCameraX(falcon.getX() + CAM_X_OFFSET);
+        moveCameraY(falcon.getY() + CAM_Y_OFFSET);
 
         // creating the pipes
         obstacles = new Obstacle[3];
         for (int i = 0; i < obstacles.length; i++) {
-            obstacles[i] = new Obstacle(200 + PIPE_GAP_AMOUNT * Obstacle.WIDTH * i);
+            obstacles[i] = new Obstacle(200 + OBSTACLE_GAP_AMOUNT * Obstacle.WIDTH * i);
             
         }
         score=0;
@@ -75,7 +75,7 @@ public class PlayState extends State {
         // update any game models
         falcon.update(deltaTime);
         // move the camera to match the bird
-        moveCameraX(falcon.getX() + CAM_X_OFFSET);
+        moveCameraY(falcon.getX() + CAM_Y_OFFSET);
 
         // did bird hit the bottom of the screen
         if (falcon.getY() <= 0) {
@@ -114,7 +114,7 @@ public class PlayState extends State {
         for (int i = 0; i < obstacles.length; i++) {
             // has the bird passed the pipe
             if (getCameraX() - MyGdxGame.WIDTH / 4 > obstacles[i].getX() + Obstacle.WIDTH) {
-                float x = obstacles[i].getX() + PIPE_GAP_AMOUNT * Obstacle.WIDTH * obstacles.length;
+                float x = obstacles[i].getX() + OBSTACLE_GAP_AMOUNT * Obstacle.WIDTH * obstacles.length;
                 obstacles[i].setX(x);
             }
         }
