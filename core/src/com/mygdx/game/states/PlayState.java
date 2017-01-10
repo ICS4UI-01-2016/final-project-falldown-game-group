@@ -38,7 +38,7 @@ public class PlayState extends State {
         falcon = new Falcon(50, 200);
         bg = new Texture("bg.png");
         // move the camera to match the bird
-        moveCameraX(Falcon.getX() + CAM_X_OFFSET);
+        moveCameraX(falcon.getX() + CAM_X_OFFSET);
 
         // creating the pipes
         obstacles = new Obstacle[3];
@@ -104,7 +104,7 @@ public class PlayState extends State {
                     pref.putInteger("highScore", score);
                     pref.flush();
                 }
-            }else if(!obstacles[i].hasPassed()&&falcon.getX()>obstacles[i].getX()+Pipe.WIDTH){
+            }else if(!obstacles[i].hasPassed()&&falcon.getX()>obstacles[i].getX()+Obstacle.WIDTH){
                 score++;
                 obstacles[i].pass();
             }
