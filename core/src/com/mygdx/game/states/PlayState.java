@@ -125,7 +125,6 @@ public class PlayState extends State {
         // handle any player input changes
 
         if (Gdx.input.justTouched()) {
-            falcon.jump();
         }
     }
 
