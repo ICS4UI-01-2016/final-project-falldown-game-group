@@ -58,6 +58,14 @@ public class Falcon {
         return position.y;
     }
     
+    public float moveRight(){
+        return position.x-MOVEMENT;
+    }
+    
+    public float moveLeft(){
+        return position.x+MOVEMENT;
+    }
+    
     public Rectangle getBounds(){
         return bounds;
     }
