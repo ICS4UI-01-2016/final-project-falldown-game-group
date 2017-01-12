@@ -6,6 +6,7 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -75,7 +76,7 @@ public class PlayState extends State {
         // update any game models
         falcon.update(deltaTime);
         // move the camera to match the bird
-        moveCameraY(falcon.getX() + CAM_Y_OFFSET);
+        moveCameraY(falcon.getY() + CAM_Y_OFFSET);
 
         // did bird hit the bottom of the screen
         if (falcon.getY() <= 0) {
@@ -124,7 +125,10 @@ public class PlayState extends State {
     public void handleInput() {
         // handle any player input changes
 
-        if (Gdx.input.justTouched()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            falcon.moveLeft();
+        }else if (Gdx.input.isKeyPressed(Input.Keys.D)){
+            falcon.moveRight();
         }
     }
 
