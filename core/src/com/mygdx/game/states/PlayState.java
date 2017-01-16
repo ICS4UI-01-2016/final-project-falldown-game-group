@@ -78,8 +78,8 @@ public class PlayState extends State {
         // move the camera to match the bird
         moveCameraY(falcon.getY() + CAM_Y_OFFSET);
 
-        // did bird hit the bottom of the screen
-        if (falcon.getY() <= 0) {
+        // did Falcon hit the top of the screen
+        if (falcon.getY() >= MyGdxGame.WIDTH) {
             // end the game
             StateManager gsm = getStateManager();
             // pop off the game screen to go to menu
@@ -92,7 +92,7 @@ public class PlayState extends State {
                 }
         }
 
-        // did the bird hit a pipe
+        // did the Falcon hit a obstacle
         for (int i = 0; i < obstacles.length; i++) {
             if (obstacles[i].collides(falcon)) {
                 // end the game
