@@ -15,33 +15,38 @@ import com.badlogic.gdx.math.Vector2;
  * @author lamon
  */
 public class Obstacle {
-    private final float PIPE_GAP = 100;
+    private final float OBSTACLE_GAP = 100;
     private final float MIN_HEIGHT = 50;
     private final float MAX_HEIGHT = 350;
     public static final float WIDTH = 52;
     
     private boolean passed;
     private Vector2 position;
-    private Texture obstacleTop;
-    private Texture obstacleBottom;
+    private Texture obstacleRight;
+    private Texture obstacleLeft;
+    private Texture obstacleMiddle;
     
-    private Rectangle topBounds;
-    private Rectangle bottomBounds;
+    private Rectangle rightBounds;
+    private Rectangle leftBounds;
+    private Rectangle middleBounds;
+    
     
     public Obstacle(float x){
-        float y = (int)(Math.random()*(325-75+1) + 75); 
+        float y = (int)(Math.random()*(325-25+1) + 25); 
         position = new Vector2(x,y);
-        obstacleTop = new Texture("toptube.png");
-        obstacleBottom = new Texture("bottomtube.png");
+        obstacleRight = new Texture("back.png");
+        obstacleLeft = new Texture("back.png");
+        obstacleMiddle = new Texture("back.png");
         
-        topBounds = new Rectangle(position.x, position.y + PIPE_GAP/2, obstacleTop.getWidth(), obstacleTop.getHeight());
-        bottomBounds = new Rectangle(position.x, position.y - PIPE_GAP/2 - obstacleBottom.getHeight(), obstacleBottom.getWidth(), obstacleBottom.getHeight());
+        rightBounds = new Rectangle(position.x + OBSTACLE_GAP/3, position.y, obstacleRight.getWidth(), obstacleRight.getHeight());
+        leftBounds = new Rectangle(position.x - OBSTACLE_GAP/3, position.y - obstacleLeft.getHeight(), obstacleLeft.getWidth(), obstacleLeft.getHeight());
         passed=false;
     }
     
     public void render(SpriteBatch batch){
-        batch.draw(obstacleTop, position.x, position.y + PIPE_GAP/2);
-        batch.draw(obstacleBottom, position.x, position.y - PIPE_GAP/2 - obstacleBottom.getHeight());
+        batch.draw(obstacleRight, position.x + OBSTACLE_GAP/3, position.y);
+        batch.draw(obstacleLeft, position.x - OBSTACLE_GAP/3 - obstacleLeft.getWidth(), position.y);
+        
     }
     
     public float getX(){
@@ -51,25 +56,25 @@ public class Obstacle {
     public void setX(float x){
         passed=false;
         position.x = x;
-        float y = (int)(Math.random()*(325-75+1) + 75); 
+        float y = (int)(Math.random()*(325-25+1) + 25); 
         position.y = y;
-        topBounds.setPosition(position.x, position.y + PIPE_GAP/2);
-        bottomBounds.setPosition(position.x, position.y - PIPE_GAP/2 - obstacleBottom.getHeight());
+        rightBounds.setPosition(position.x + OBSTACLE_GAP/2, position.y);
+        leftBounds.setPosition(position.x, position.y - OBSTACLE_GAP/2 - obstacleLeft.getHeight());
     }
     
     public boolean collides(Falcon f){
-        if(topBounds.overlaps(f.getBounds())){
+        if(rightBounds.overlaps(f.getBounds())){
             return true;
         }
-        if(bottomBounds.overlaps(f.getBounds())){
+        if(leftBounds.overlaps(f.getBounds())){
             return true;
         }
         return false;
     }
     
     public void dispose(){
-        obstacleTop.dispose();
-        obstacleBottom.dispose();
+        obstacleRight.dispose();
+        obstacleLeft.dispose();
     }
     public boolean hasPassed(){
         return passed;
