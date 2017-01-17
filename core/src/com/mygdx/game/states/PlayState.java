@@ -37,7 +37,7 @@ public class PlayState extends State {
         setCameraView(MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         //setCameraPosition(FlappyBird.WIDTH/2, FlappyBird.HEIGHT/2);
         falcon = new Falcon(50, 200);
-        bg = new Texture("bg.png");
+        bg = new Texture("Space.jpg");
         // move the camera to match the bird
         moveCameraY(falcon.getY() + CAM_Y_OFFSET);
 
