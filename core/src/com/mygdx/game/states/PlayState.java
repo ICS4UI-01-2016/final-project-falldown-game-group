@@ -36,7 +36,7 @@ public class PlayState extends State {
         super(sm);
         setCameraView(MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         //setCameraPosition(FlappyBird.WIDTH/2, FlappyBird.HEIGHT/2);
-        falcon = new Falcon(50, 200);
+        falcon = new Falcon(200, 50);
         bg = new Texture("Space.jpg");
         // move the camera to match the bird
         moveCameraY(falcon.getY() + CAM_Y_OFFSET);
@@ -127,7 +127,10 @@ public class PlayState extends State {
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             falcon.moveLeft();
-        }else if (Gdx.input.isKeyPressed(Input.Keys.D)){
+        }else{
+            falcon.stop();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.D)){
             falcon.moveRight();
         }
     }
