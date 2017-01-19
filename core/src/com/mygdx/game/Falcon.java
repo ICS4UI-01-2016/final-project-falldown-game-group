@@ -68,10 +68,13 @@ public class Falcon {
     public float stop(){
         return position.x;
     }
-    
+    public float collide(){
+        return position.y=0;
+    }
     public Rectangle getBounds(){
         return bounds;
     }
+    
     
     public void dispose(){
         falconPic.dispose();
