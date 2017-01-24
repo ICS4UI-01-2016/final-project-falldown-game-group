@@ -25,7 +25,7 @@ public class Falcon {
     
     public Falcon(int x, int y){
         position = new Vector3(x,y,0);
-        velocity = new Vector3(MOVEMENT,0,0);
+        velocity = new Vector3(0,MOVEMENT,0);
         falconPic = new Texture("Falcon.jpg");
         bounds = new Rectangle(position.x, position.y, falconPic.getWidth(), falconPic.getHeight());
     }
@@ -74,8 +74,6 @@ public class Falcon {
     public Rectangle getBounds(){
         return bounds;
     }
-    
-    
     public void dispose(){
         falconPic.dispose();
     }
