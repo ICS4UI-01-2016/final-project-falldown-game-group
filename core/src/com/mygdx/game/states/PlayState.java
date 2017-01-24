@@ -36,7 +36,7 @@ public class PlayState extends State {
         super(sm);
         setCameraView(MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         //setCameraPosition(FlappyBird.WIDTH/2, FlappyBird.HEIGHT/2);
-        falcon = new Falcon(200, 50);
+        falcon = new Falcon(5, 5);
         bg = new Texture("Space.jpg");
         // move the camera to match the bird
         moveCameraY(falcon.getY() + CAM_Y_OFFSET);
@@ -44,13 +44,12 @@ public class PlayState extends State {
         // creating the pipes
         obstacles = new Obstacle[3];
         for (int i = 0; i < obstacles.length; i++) {
-            obstacles[i] = new Obstacle(200 + OBSTACLE_GAP_AMOUNT * Obstacle.WIDTH * i);
+            obstacles[i] = new Obstacle(200 + OBSTACLE_GAP_AMOUNT * Obstacle.HEIGHT * i);
             
         }
         score=0;
         font =new BitmapFont();
     }
-
     @Override
     public void render(SpriteBatch batch) {
         // draw the screen
@@ -70,7 +69,6 @@ public class PlayState extends State {
         // end the stuff to draw
         batch.end();
     }
-
     @Override
     public void update(float deltaTime) {
         // update any game models
@@ -96,7 +94,7 @@ public class PlayState extends State {
         for (int i = 0; i < obstacles.length; i++) {
             if (obstacles[i].collides(falcon)) {
                 falcon.collide();
-            }else if(!obstacles[i].hasPassed()&&falcon.getX()>obstacles[i].getX()+Obstacle.WIDTH){
+            }else if(!obstacles[i].hasPassed()&&falcon.getX()>obstacles[i].getX()+Obstacle.HEIGHT){
                 score++;
                 obstacles[i].pass();
             }
@@ -105,9 +103,9 @@ public class PlayState extends State {
         // adjust the pipes
         for (int i = 0; i < obstacles.length; i++) {
             // has the falcon passed the obstacle
-            if (getCameraX() - MyGdxGame.WIDTH / 4 > obstacles[i].getX() + Obstacle.WIDTH) {
-                float x = obstacles[i].getX() + OBSTACLE_GAP_AMOUNT * Obstacle.WIDTH * obstacles.length;
-                obstacles[i].setX(x);
+            if (getCameraX() - MyGdxGame.HEIGHT / 4 > obstacles[i].getY()+ Obstacle.HEIGHT) {
+                float x = obstacles[i].getY() + OBSTACLE_GAP_AMOUNT * Obstacle.HEIGHT * obstacles.length;
+                obstacles[i].setY(x);
             }
         }
     }
@@ -123,6 +121,8 @@ public class PlayState extends State {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)){
             falcon.moveRight();
+        }else{
+            falcon.stop();
         }
     }
 
