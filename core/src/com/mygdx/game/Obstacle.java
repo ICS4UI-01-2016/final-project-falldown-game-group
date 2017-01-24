@@ -18,7 +18,7 @@ public class Obstacle {
     private final float OBSTACLE_GAP = 100;
     private final float MIN_HEIGHT = 50;
     private final float MAX_HEIGHT = 350;
-    public static final float WIDTH = 52;
+    public static final float HEIGHT = 52;
     
     private boolean passed;
     private Vector2 position;
@@ -52,12 +52,15 @@ public class Obstacle {
     public float getX(){
         return position.x;
     }
+    public float getY(){
+        return position.y;
+    }
     
-    public void setX(float x){
+    public void setY(float y){
         passed=false;
-        position.x = x;
-        float y = (int)(Math.random()*(325-25+1) + 25); 
         position.y = y;
+        float x = (int)(Math.random()*(325-25+1) + 25); 
+        position.x = x;
         rightBounds.setPosition(position.x + OBSTACLE_GAP/2, position.y);
         leftBounds.setPosition(position.x, position.y - OBSTACLE_GAP/2 - obstacleLeft.getHeight());
     }
